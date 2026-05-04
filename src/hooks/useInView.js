@@ -1,3 +1,4 @@
+// src/hooks/useInView.js
 import { useEffect, useRef, useState } from 'react'
 
 export function useInView(options = {}) {
@@ -7,17 +8,10 @@ export function useInView(options = {}) {
   useEffect(() => {
     const el = ref.current
     if (!el) return
-
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true)
-          observer.unobserve(el)
-        }
-      },
-      { threshold: 0.12, ...options }
+      ([entry]) => { if (entry.isIntersecting) { setInView(true); observer.unobserve(el) } },
+      { threshold: 0.1, ...options }
     )
-
     observer.observe(el)
     return () => observer.disconnect()
   }, [])
