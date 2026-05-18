@@ -14,20 +14,18 @@ function Hero() {
 
       <div className="container relative">
         <div className="max-w-3xl">
-          {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-accent-cyan font-body font-medium mb-8 anim-fade-in">
             <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan animate-pulse" />
-            Shopify · WooCommerce · OpenCart
+            Shopify · WooCommerce · OpenCart · Magento · BigCommerce
           </div>
 
-          {/* Headline */}
           <h1 className="font-display font-black text-5xl sm:text-6xl lg:text-7xl leading-[1.04] tracking-tight mb-6 anim-fade-up">
             Your ecommerce store,<br />
             <span className="text-gradient">set up properly.</span>
           </h1>
 
           <p className="text-white/45 text-lg leading-relaxed max-w-xl mb-10 font-body anim-fade-up d-200">
-            We handle the technical setup, catalog structure, and store configuration across Shopify, WooCommerce, and OpenCart — so your store launches clean and runs without operational headaches.
+            We handle every layer of your store setup — platform configuration, catalog structure, branding, and ongoing operations — so you launch clean and sell without technical friction.
           </p>
 
           <div className="flex flex-wrap gap-4 mb-14 anim-fade-up d-300">
@@ -35,12 +33,11 @@ function Hero() {
             <Link to="/services" className="btn-ghost">View Services</Link>
           </div>
 
-          {/* Trust row */}
-          <div className="flex flex-wrap gap-8 anim-fade-up d-400">
+          <div className="flex flex-wrap gap-10 anim-fade-up d-400">
             {[
+              { n: '5',     l: 'Platforms supported' },
               { n: '48hr',  l: 'Average kickoff time' },
-              { n: '3',     l: 'Major platforms covered' },
-              { n: '100%',  l: 'Platform-native builds' },
+              { n: '3',     l: 'Stages: Plan, Build, Operate' },
             ].map(({ n, l }) => (
               <div key={l}>
                 <p className="font-display font-black text-2xl text-white">{n}</p>
@@ -54,16 +51,93 @@ function Hero() {
   )
 }
 
+/* ─── Why Go Online (Awareness) ─────────────────────────── */
+const awarenessPoints = [
+  {
+    icon: '📦',
+    title: 'Your products deserve more than WhatsApp orders',
+    desc: 'Manual order taking through messages and calls doesn\'t scale — and it costs you sales every time someone can\'t reach you. A store works 24/7 without you.',
+  },
+  {
+    icon: '🌍',
+    title: 'Your next customer is already searching online',
+    desc: 'Buyers research before they purchase. If your business isn\'t findable online, that sale goes to someone who is. An ecommerce store is your permanent, searchable presence.',
+  },
+  {
+    icon: '📊',
+    title: 'Visibility into what\'s actually selling',
+    desc: 'A properly configured store tells you exactly what sells, when, and to whom. You stop guessing inventory and start making decisions based on real data.',
+  },
+  {
+    icon: '🔄',
+    title: 'Operational control you don\'t have right now',
+    desc: 'Payments, invoices, shipping labels, order history — all in one place. The manual back-and-forth gets replaced by a system that runs predictably.',
+  },
+]
+
+function WhyGoOnline() {
+  const [ref, inView] = useInView()
+  return (
+    <section className="section bg-bg-secondary relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-96 h-96 bg-accent-blue/4 rounded-full blur-3xl" />
+      <div className="container relative">
+        <div ref={ref} className={`max-w-2xl mb-14 reveal ${inView ? 'show' : ''}`}>
+          <p className="label mb-3">Why Ecommerce</p>
+          <h2 className="font-display font-black text-4xl sm:text-5xl text-white leading-tight mb-4">
+            Still selling manually?<br />
+            <span className="text-gradient">Here is what that costs you.</span>
+          </h2>
+          <p className="text-white/40 font-body leading-relaxed">
+            Most businesses know they need an online store. What they underestimate is how much revenue and operational clarity they lose every month without one.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-12">
+          {awarenessPoints.map((p, i) => (
+            <AwarenessCard key={p.title} {...p} delay={i * 80} />
+          ))}
+        </div>
+
+        {/* Conversion nudge */}
+        <div className="glass rounded-2xl p-7 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+          <div>
+            <p className="font-display font-bold text-white text-lg mb-1">
+              Ready to move from manual to operational?
+            </p>
+            <p className="text-white/40 text-sm font-body">
+              Book a free 30-minute call. We\'ll tell you exactly what your store setup involves.
+            </p>
+          </div>
+          <Link to="/contact" className="btn-primary flex-shrink-0">
+            Book Free Consultation
+          </Link>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function AwarenessCard({ icon, title, desc, delay }) {
+  const [ref, inView] = useInView()
+  return (
+    <div ref={ref} className={`card p-6 reveal ${inView ? 'show' : ''}`} style={{transitionDelay:`${delay}ms`}}>
+      <div className="text-2xl mb-4">{icon}</div>
+      <h3 className="font-display font-bold text-white text-base mb-2">{title}</h3>
+      <p className="text-white/40 text-sm font-body leading-relaxed">{desc}</p>
+    </div>
+  )
+}
+
 /* ─── Platforms bar ─────────────────────────────────────── */
 function PlatformsBar() {
   const [ref, inView] = useInView()
   return (
-    <div ref={ref} className={`border-y border-white/5 bg-bg-secondary py-10 reveal ${inView ? 'show' : ''}`}>
+    <div ref={ref} className={`border-y border-white/5 bg-bg-primary py-10 reveal ${inView ? 'show' : ''}`}>
       <div className="container">
         <p className="label text-center mb-8">Platform Expertise</p>
-        <div className="flex flex-wrap justify-center items-center gap-10">
-          {['Shopify','WooCommerce','OpenCart','BigCommerce','Wix Stores'].map((p, i) => (
-            <span key={p} className="font-display font-bold text-lg text-white/15 hover:text-white/40 transition-colors cursor-default" style={{transitionDelay:`${i*50}ms`}}>
+        <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-12">
+          {['Shopify', 'WooCommerce', 'OpenCart', 'Magento', 'BigCommerce'].map((p, i) => (
+            <span key={p} className="font-display font-bold text-lg text-white/15 hover:text-white/45 transition-colors duration-300 cursor-default" style={{transitionDelay:`${i*50}ms`}}>
               {p}
             </span>
           ))}
@@ -77,10 +151,12 @@ function PlatformsBar() {
 const overviewServices = [
   { icon:'🛍', title:'Shopify Setup', desc:'Full store configuration, payment, shipping, and catalog setup on Shopify.' },
   { icon:'🛒', title:'WooCommerce Setup', desc:'WordPress ecommerce configured correctly from installation to launch.' },
-  { icon:'🏪', title:'OpenCart Setup', desc:'Open-source store setup for businesses prioritizing platform flexibility and low overhead.' },
+  { icon:'🏪', title:'OpenCart Setup', desc:'Open-source store setup for businesses prioritizing flexibility and low overhead.' },
+  { icon:'⚙️', title:'Magento Setup', desc:'Enterprise-grade ecommerce for complex catalogs, B2B, and high-volume operations.' },
+  { icon:'🚀', title:'BigCommerce Setup', desc:'Scalable hosted ecommerce with no transaction fees — fully configured.' },
   { icon:'📦', title:'Product Upload', desc:'Structured, SEO-ready product listings uploaded at scale — accurately and consistently.' },
-  { icon:'🎨', title:'Store Customization', desc:'Brand-aligned store design using platform-native tools. No custom dev needed.' },
-  { icon:'📱', title:'Social & Branding', desc:'Brand consistency from your store to your social presence, configured and aligned.' },
+  { icon:'🎨', title:'Store Customization', desc:'Brand-aligned store design using platform-native tools. No custom dev required.' },
+  { icon:'🔧', title:'Operations & Maintenance', desc:'Ongoing post-launch support — monitoring, order operations, upgrades, and admin tasks on a monthly retainer.' },
 ]
 
 function ServicesOverview() {
@@ -91,15 +167,15 @@ function ServicesOverview() {
         <div ref={ref} className={`max-w-xl mb-14 reveal ${inView ? 'show' : ''}`}>
           <p className="label mb-3">What We Do</p>
           <h2 className="font-display font-black text-4xl sm:text-5xl text-white leading-tight mb-4">
-            Every layer of your store setup — covered.
+            Every layer of your store — covered.
           </h2>
           <p className="text-white/40 font-body leading-relaxed">
-            From initial platform configuration to product catalog uploads, we handle the operational work so you don't have to figure it out yourself.
+            From initial platform setup to post-launch operations. We handle the technical and operational work so you can focus on running your business.
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {overviewServices.map((s, i) => (
-            <ServiceCard key={s.title} {...s} delay={i * 70} />
+            <ServiceCard key={s.title} {...s} delay={i * 60} />
           ))}
         </div>
         <div className="mt-10 text-center">
@@ -113,56 +189,135 @@ function ServicesOverview() {
 function ServiceCard({ icon, title, desc, delay }) {
   const [ref, inView] = useInView()
   return (
-    <div ref={ref} className={`card p-6 group reveal ${inView ? 'show' : ''}`} style={{transitionDelay:`${delay}ms`}}>
-      <div className="w-10 h-10 rounded-xl bg-accent-blue/10 flex items-center justify-center text-lg mb-5 group-hover:bg-accent-blue/20 transition-colors">
+    <div ref={ref} className={`card p-5 group reveal ${inView ? 'show' : ''}`} style={{transitionDelay:`${delay}ms`}}>
+      <div className="w-10 h-10 rounded-xl bg-accent-blue/10 flex items-center justify-center text-lg mb-4 group-hover:bg-accent-blue/20 transition-colors">
         {icon}
       </div>
-      <h3 className="font-display font-bold text-white text-base mb-2">{title}</h3>
-      <p className="text-white/35 text-sm leading-relaxed font-body">{desc}</p>
+      <h3 className="font-display font-bold text-white text-sm mb-2">{title}</h3>
+      <p className="text-white/35 text-xs leading-relaxed font-body">{desc}</p>
     </div>
   )
 }
 
-/* ─── Process ───────────────────────────────────────────── */
-const steps = [
-  { n:'01', t:'Discovery Call', d:'A 30-minute conversation to understand your business, platform needs, product range, and timeline. No commitment required.' },
-  { n:'02', t:'Store Planning', d:'We map your category structure, page architecture, and platform configuration before touching anything live.' },
-  { n:'03', t:'Setup & Configuration', d:'Platform installation, theme setup, payment and shipping configuration — done systematically, not haphazardly.' },
-  { n:'04', t:'Content & Product Upload', d:'Your catalog goes live — structured, SEO-ready, and consistently formatted across every listing.' },
-  { n:'05', t:'Launch & Handover', d:'Final QA across desktop and mobile. You receive a handover document with everything documented.' },
+/* ─── 3-Stage Process ───────────────────────────────────── */
+const stages = [
+  {
+    number: '01',
+    label: 'Consultation & Planning',
+    headline: 'Understand. Plan. Align.',
+    desc: 'Every project begins with understanding your business, products, and goals — before recommending a platform or writing a single line of configuration. We produce a clear project scope so there are no surprises once work begins.',
+    steps: [
+      'Discovery call — business type, product range, sales channels',
+      'Platform recommendation based on your actual requirements',
+      'Store architecture and catalog structure planning',
+      'Project scope, timeline, and delivery plan agreed in writing',
+    ],
+    outcome: 'Platform selected. Scope documented. Ready to build.',
+    color: 'from-accent-blue/10 to-transparent',
+    accentColor: 'text-accent-blue',
+  },
+  {
+    number: '02',
+    label: 'Agile Implementation',
+    headline: 'Build. Test. Deliver.',
+    desc: 'Store setup follows a structured Agile delivery process — broken into sprints with regular checkpoints. You see progress throughout, not just at the end. Nothing goes live without passing QA on desktop and mobile.',
+    steps: [
+      'Sprint-based delivery — configuration, then content, then catalog',
+      'PM, QA, and implementation team working in structured collaboration',
+      'Client review checkpoints at each sprint milestone',
+      'Full QA pass before handover — functionality, mobile, and performance',
+    ],
+    outcome: 'Store live. Tested. Documented. Ready to sell.',
+    color: 'from-accent-indigo/10 to-transparent',
+    accentColor: 'text-accent-indigo',
+  },
+  {
+    number: '03',
+    label: 'Operations & Maintenance',
+    headline: 'Monitor. Support. Maintain.',
+    desc: 'Launch is not the end of the work — it is where the operational responsibility begins. Our monthly retainer covers system health, order operations, platform updates, and technical support so your store stays reliable long after go-live.',
+    steps: [
+      'Daily system health monitoring — uptime, performance, alerts',
+      'Order fulfillment monitoring and stuck order resolution',
+      'Platform upgrades, patching, and admin configuration',
+      'End-user technical support and monthly operations report',
+    ],
+    outcome: 'Store monitored. Issues resolved. Operations stable.',
+    color: 'from-accent-cyan/10 to-transparent',
+    accentColor: 'text-accent-cyan',
+    isRetainer: true,
+  },
 ]
 
 function Process() {
   const [ref, inView] = useInView()
   return (
-    <section className="section bg-bg-secondary">
-      <div className="container">
-        <div ref={ref} className={`max-w-xl mb-14 reveal ${inView ? 'show' : ''}`}>
+    <section className="section bg-bg-secondary relative overflow-hidden">
+      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-64 h-64 bg-accent-indigo/4 rounded-full blur-3xl" />
+      <div className="container relative">
+        <div ref={ref} className={`max-w-xl mb-16 reveal ${inView ? 'show' : ''}`}>
           <p className="label mb-3">How We Work</p>
           <h2 className="font-display font-black text-4xl sm:text-5xl text-white leading-tight mb-4">
-            A structured process. No surprises.
+            Three stages.<br />Zero ambiguity.
           </h2>
           <p className="text-white/40 font-body leading-relaxed">
-            Every project follows the same disciplined sequence — so you know exactly where things stand at every stage.
+            From your first call to ongoing operations, every stage of working with DTW follows a defined, documented process. You always know what is happening and what comes next.
           </p>
         </div>
 
-        <div className="flex flex-col gap-3 max-w-2xl">
-          {steps.map((s, i) => <ProcessStep key={s.n} {...s} delay={i*80} />)}
+        <div className="flex flex-col gap-5">
+          {stages.map((stage, i) => <StageCard key={stage.number} stage={stage} delay={i * 100} />)}
         </div>
       </div>
     </section>
   )
 }
 
-function ProcessStep({ n, t, d, delay }) {
+function StageCard({ stage, delay }) {
   const [ref, inView] = useInView()
   return (
-    <div ref={ref} className={`card p-6 flex gap-6 items-start hover:border-accent-blue/20 reveal ${inView ? 'show' : ''}`} style={{transitionDelay:`${delay}ms`}}>
-      <span className="font-display font-black text-3xl text-gradient-warm opacity-20 leading-none flex-shrink-0 mt-0.5">{n}</span>
-      <div>
-        <h3 className="font-display font-bold text-white text-base mb-1.5">{t}</h3>
-        <p className="text-white/35 text-sm leading-relaxed font-body">{d}</p>
+    <div
+      ref={ref}
+      className={`card p-7 sm:p-8 reveal ${inView ? 'show' : ''}`}
+      style={{transitionDelay:`${delay}ms`}}
+    >
+      <div className="grid lg:grid-cols-5 gap-8 items-start">
+        {/* Left: number + label */}
+        <div className="lg:col-span-1">
+          <div className={`font-display font-black text-5xl leading-none mb-2 ${stage.accentColor} opacity-20`}>
+            {stage.number}
+          </div>
+          <p className="label" style={{color: 'inherit'}}>{stage.label}</p>
+          {stage.isRetainer && (
+            <span className="inline-block mt-2 text-2xs px-2.5 py-1 rounded-full bg-accent-cyan/10 text-accent-cyan font-body font-medium">
+              Monthly Retainer
+            </span>
+          )}
+        </div>
+
+        {/* Middle: headline + desc */}
+        <div className="lg:col-span-2">
+          <h3 className="font-display font-black text-xl text-white mb-3">{stage.headline}</h3>
+          <p className="text-white/45 text-sm font-body leading-relaxed">{stage.desc}</p>
+        </div>
+
+        {/* Right: steps + outcome */}
+        <div className="lg:col-span-2">
+          <ul className="flex flex-col gap-2.5 mb-5">
+            {stage.steps.map((s, i) => (
+              <li key={i} className="flex items-start gap-2.5">
+                <span className={`text-xs mt-0.5 flex-shrink-0 ${stage.accentColor}`}>✓</span>
+                <span className="text-sm text-white/45 font-body leading-relaxed">{s}</span>
+              </li>
+            ))}
+          </ul>
+          <div className={`rounded-xl p-3.5 bg-gradient-to-r ${stage.color}`}>
+            <p className="text-xs text-white/35 font-body">
+              <span className="text-white/55 font-medium">Outcome: </span>
+              {stage.outcome}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   )
@@ -178,24 +333,26 @@ function FeaturedProjects() {
           <div>
             <p className="label mb-3">Recent Work</p>
             <h2 className="font-display font-black text-4xl sm:text-5xl text-white leading-tight">
-              Stores we've launched.
+              Stores we have launched.
             </h2>
           </div>
           <Link to="/portfolio" className="btn-ghost flex-shrink-0">View All Projects →</Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {projects.slice(0, 2).map((p, i) => <ProjectCard key={p.id} {...p} delay={i*100} />)}
+          {projects.slice(0, 2).map((p, i) => (
+            <ProjectCard key={p.id} {...p} delay={i * 100} />
+          ))}
         </div>
       </div>
     </section>
   )
 }
 
-function ProjectCard({ name, category, platform, badge, color, accentColor, summary, metrics, tags, delay }) {
+function ProjectCard({ name, category, platform, badge, color, accentColor, summary, metrics, delay }) {
   const [ref, inView] = useInView()
   return (
     <div ref={ref} className={`card p-7 reveal ${inView ? 'show' : ''}`} style={{transitionDelay:`${delay}ms`}}>
-      <div className={`w-full h-28 rounded-xl bg-gradient-to-br ${color} mb-6 flex items-center justify-center`}>
+      <div className={`w-full h-24 rounded-xl bg-gradient-to-br ${color} mb-6 flex items-center justify-center`}>
         <span className={`font-display font-black text-3xl ${accentColor} opacity-40`}>{name[0]}</span>
       </div>
       <div className="flex items-center gap-2 mb-3">
@@ -216,10 +373,10 @@ function ProjectCard({ name, category, platform, badge, color, accentColor, summ
 
 /* ─── Why DTW ───────────────────────────────────────────── */
 const reasons = [
-  { t:'Ecommerce-only focus', d:'We don\'t do general web design. Every workflow, decision, and default we use is shaped by ecommerce-specific requirements.' },
-  { t:'Structured delivery', d:'Projects follow a defined sequence. You get a scope document before we start and a handover document when we finish.' },
-  { t:'Platform depth', d:'We know Shopify, WooCommerce, and OpenCart in operational detail — not just the surface settings most generalists touch.' },
-  { t:'Catalog-first thinking', d:'We structure your product catalog for manageability and scale — not just to look good on launch day.' },
+  { t:'Ecommerce-only focus', d:'We do not do general web design or development. Every workflow, default, and recommendation is shaped by ecommerce-specific operational experience.' },
+  { t:'Structured Agile delivery', d:'Projects are broken into defined sprints with client checkpoints. You see progress throughout — not a black box that opens on launch day.' },
+  { t:'Platform depth across five platforms', d:'Shopify, WooCommerce, OpenCart, Magento, and BigCommerce — in operational detail, not just surface-level familiarity.' },
+  { t:'Post-launch operations covered', d:'We do not disappear after go-live. Our retainer covers monitoring, order operations, upgrades, and support as an ongoing engagement.' },
 ]
 
 function WhyDTW() {
@@ -232,13 +389,16 @@ function WhyDTW() {
           <h2 className="font-display font-black text-4xl sm:text-5xl text-white leading-tight mb-5">
             Ecommerce setup done by people who do only this.
           </h2>
+          <p className="text-white/40 font-body leading-relaxed mb-6">
+            Most businesses try to set up their store themselves, spend weeks on avoidable configuration problems, then end up with a catalog structure that becomes a management headache six months later. We prevent that before it starts.
+          </p>
           <p className="text-white/40 font-body leading-relaxed mb-8">
-            Most businesses try to set up their store themselves, waste weeks on avoidable configuration errors, then end up with a catalog structure that becomes a problem six months later. We fix that before it starts.
+            DTW is an ecommerce-only agency. Everything we do — platform selection, store architecture, catalog setup, and post-launch operations — is built around one outcome: a store that works correctly and stays that way.
           </p>
           <Link to="/about" className="btn-ghost">Learn About DTW →</Link>
         </div>
         <div className="grid grid-cols-1 gap-4">
-          {reasons.map((r, i) => <ReasonCard key={r.t} {...r} delay={i*80} />)}
+          {reasons.map((r, i) => <ReasonCard key={r.t} {...r} delay={i * 80} />)}
         </div>
       </div>
     </section>
@@ -260,26 +420,54 @@ function ReasonCard({ t, d, delay }) {
   )
 }
 
-/* ─── Home CTA ──────────────────────────────────────────── */
+/* ─── Conversion CTA ────────────────────────────────────── */
 function HomeCTA() {
   const [ref, inView] = useInView()
   return (
     <section className="section bg-bg-primary relative overflow-hidden">
       <div className="absolute inset-0 dot-grid opacity-30" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[250px] bg-accent-blue/6 rounded-full blur-3xl anim-glow" />
-      <div ref={ref} className={`container relative text-center max-w-2xl mx-auto reveal ${inView ? 'show' : ''}`}>
-        <p className="label mb-4">Get Started</p>
-        <h2 className="font-display font-black text-4xl sm:text-5xl text-white leading-tight mb-5">
-          Ready to launch your store?
-        </h2>
-        <p className="text-white/40 font-body leading-relaxed mb-8 max-w-lg mx-auto">
-          Book a free 30-minute consultation. We'll scope your project, identify the right platform, and tell you exactly what's involved.
-        </p>
-        <div className="flex flex-wrap gap-4 justify-center mb-8">
-          <Link to="/contact" className="btn-primary">Book Free Consultation</Link>
-          <Link to="/portfolio" className="btn-ghost">See Our Work</Link>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[280px] bg-accent-blue/6 rounded-full blur-3xl anim-glow" />
+
+      <div ref={ref} className={`container relative reveal ${inView ? 'show' : ''}`}>
+        <div className="max-w-3xl mx-auto">
+          {/* Main CTA block */}
+          <div className="text-center mb-10">
+            <p className="label mb-4">Get Started</p>
+            <h2 className="font-display font-black text-4xl sm:text-5xl text-white leading-tight mb-5">
+              Ready to launch your store<br />
+              <span className="text-gradient">the right way?</span>
+            </h2>
+            <p className="text-white/40 font-body leading-relaxed mb-8 max-w-lg mx-auto">
+              Book a free 30-minute consultation. We will scope your project, recommend the right platform, and give you a clear picture of what your store setup involves — no commitment required.
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center mb-6">
+              <Link to="/contact" className="btn-primary px-8 py-4 text-base">
+                Book Free Consultation
+              </Link>
+              <Link to="/portfolio" className="btn-ghost px-8 py-4 text-base">
+                See Our Work
+              </Link>
+            </div>
+            <p className="text-xs text-white/20 font-body">
+              No commitment · Free consultation · Response within 24 hours
+            </p>
+          </div>
+
+          {/* Trust signals row */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {[
+              { icon:'📋', t:'Scoped before we start', d:'You receive a written project scope before any work begins. No surprises mid-project.' },
+              { icon:'✅', t:'QA before handover', d:'Every store is tested across desktop and mobile before we hand it over.' },
+              { icon:'📄', t:'Documented on completion', d:'You get a full handover document covering settings, access, and how to manage your store.' },
+            ].map(item => (
+              <div key={item.t} className="card p-5 text-center">
+                <div className="text-xl mb-3">{item.icon}</div>
+                <h3 className="font-display font-bold text-white text-sm mb-1.5">{item.t}</h3>
+                <p className="text-white/30 text-xs font-body leading-relaxed">{item.d}</p>
+              </div>
+            ))}
+          </div>
         </div>
-        <p className="text-xs text-white/20 font-body">No commitment · Free consultation · Response within 24 hours</p>
       </div>
     </section>
   )
@@ -290,6 +478,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <WhyGoOnline />
       <PlatformsBar />
       <ServicesOverview />
       <Process />
