@@ -20,8 +20,8 @@ h1, h2, h3, h4, h5, h6 {
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: #07070D; }
 ::-webkit-scrollbar-thumb { background: #1E1E36; border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: #4B6BFB; }
-::selection { background: rgba(75,107,251,0.2); color: #F1F5F9; }
+::-webkit-scrollbar-thumb:hover { background: #A855F7; }
+::selection { background: rgba(168,85,247,0.2); color: #F1F5F9; }
 
 @layer utilities {
   .text-gradient {
@@ -55,15 +55,16 @@ h1, h2, h3, h4, h5, h6 {
     transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
   }
   .card:hover {
-    border-color: rgba(75,107,251,0.2);
+    border-color: rgba(168,85,247,0.25);
     transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(75,107,251,0.08);
+    box-shadow: 0 8px 32px rgba(168,85,247,0.10);
   }
   .dot-grid {
-    background-image: radial-gradient(circle, rgba(75,107,251,0.08) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgba(168,85,247,0.08) 1px, transparent 1px);
     background-size: 32px 32px;
   }
-  .glow-blue { box-shadow: 0 0 24px rgba(75,107,251,0.3); }
+  /* .glow-blue: legacy class name kept for back-compat; value is now purple */
+  .glow-blue { box-shadow: 0 0 24px rgba(168,85,247,0.3); }
   .section { padding: 6rem 0; }
   .section-sm { padding: 4rem 0; }
   .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
@@ -72,7 +73,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(6,182,212,0.8);
+    color: rgba(168,85,247,0.85);
     font-family: 'Inter', sans-serif;
   }
 
@@ -82,7 +83,7 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.75rem;
-    background: #4B6BFB;
+    background: #3B82F6;
     color: #fff;
     border-radius: 10px;
     font-size: 0.875rem;
@@ -131,8 +132,8 @@ h1, h2, h3, h4, h5, h6 {
     outline: none;
   }
   .form-input:focus {
-    border-color: rgba(75,107,251,0.5);
-    background: rgba(75,107,251,0.04);
+    border-color: rgba(168,85,247,0.5);
+    background: rgba(168,85,247,0.04);
   }
   .form-input::placeholder { color: rgba(255,255,255,0.2); }
   .form-label {

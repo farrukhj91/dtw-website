@@ -11,14 +11,22 @@ export default {
           elevated:  '#15152A',
         },
         accent: {
-          blue:    '#4B6BFB',
-          indigo:  '#5B5BD6',
-          cyan:    '#06B6D4',
-          muted:   '#3D5AF1',
+          // NOTE: brand pass round 2 — secondary accents unified onto purple.
+          // Token names 'blue' and 'cyan' are kept for back-compat with the
+          // existing className references across components; their values now
+          // resolve to the new brand purple (#A855F7). The literal brand-blue
+          // gradient endpoint (#3B82F6) lives in .btn-primary's base background
+          // and in inline radial gradients in Home.jsx / ComingSoon.jsx.
+          blue:    '#A855F7',
+          indigo:  '#8B5CF6',
+          cyan:    '#A855F7',
+          muted:   '#6366F1',
+          purple:  '#A855F7',
+          pink:    '#EC4899',
         },
         border: {
           subtle: 'rgba(255,255,255,0.06)',
-          accent: 'rgba(75,107,251,0.2)',
+          accent: 'rgba(168,85,247,0.25)',
         },
       },
       fontFamily: {
