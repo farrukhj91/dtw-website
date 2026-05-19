@@ -6,15 +6,17 @@ export default function ComingSoon() {
       <div
         aria-hidden="true"
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[640px] h-[640px] rounded-full blur-3xl anim-glow pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(75,107,251,0.18) 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, rgba(217,70,239,0.22) 0%, rgba(139,92,246,0.12) 40%, transparent 70%)" }}
       />
 
       <div className="relative z-10 container text-center">
         <div className="anim-fade-up">
-          <h1 className="font-display font-black tracking-tight text-gradient text-7xl sm:text-8xl md:text-9xl leading-none">
-            DTW
-          </h1>
-          <p className="mt-4 text-2xs sm:text-xs tracking-[0.32em] uppercase text-white/30 font-body">
+          <img
+            src="/DTW_1_png_nobg.png"
+            alt="DigiTechWorks"
+            className="mx-auto block w-72 sm:w-96 md:w-[28rem] lg:w-[32rem] h-auto"
+          />
+          <p className="-mt-2 sm:mt-0 text-2xs sm:text-xs tracking-[0.32em] uppercase text-white/30 font-body">
             DigiTechWorks
           </p>
         </div>
