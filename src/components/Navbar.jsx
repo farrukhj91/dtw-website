@@ -27,7 +27,7 @@ export default function Navbar() {
       <div className="container flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
-          <span className="font-display font-black text-xl tracking-tight text-gradient">DTW</span>
+          <img src="/DTW_1_png_nobg.png" alt="DigiTechWorks" className="h-10 w-auto" />
           <span className="hidden sm:block w-px h-4 bg-white/10" />
           <span className="hidden sm:block text-2xs text-white/25 tracking-[0.18em] uppercase font-body">DigiTechWorks</span>
         </Link>
