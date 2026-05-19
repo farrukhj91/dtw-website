@@ -25,7 +25,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-14">
           {/* Brand */}
           <div>
-            <img src="/DTW_1_png_nobg.png" alt="DigiTechWorks" className="h-14 w-auto mb-4" />
+            <img src="/DTW_1_png_nobg.png" alt="DigiTechWorks" className="h-10 w-auto mb-4" />
             <p className="text-sm text-white/30 leading-relaxed mb-6 font-body">
               Professional ecommerce store setup and optimization. Shopify, WooCommerce, OpenCart.
             </p>

@@ -9,8 +9,16 @@ function Hero() {
     <section className="relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden">
       <div className="absolute inset-0 dot-grid opacity-50" />
       <div className="absolute inset-0 bg-gradient-to-b from-bg-primary via-transparent to-bg-primary" />
-      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-accent-blue/5 rounded-full blur-3xl anim-glow" />
-      <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-accent-indigo/5 rounded-full blur-3xl anim-glow" style={{animationDelay:'2s'}} />
+      <div
+        aria-hidden="true"
+        className="absolute top-1/3 left-1/4 w-[500px] h-[500px] rounded-full blur-3xl anim-glow pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(236,72,153,0.22) 0%, rgba(168,85,247,0.10) 40%, transparent 70%)" }}
+      />
+      <div
+        aria-hidden="true"
+        className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full blur-3xl anim-glow pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(59,130,246,0.20) 0%, rgba(139,92,246,0.10) 40%, transparent 70%)", animationDelay: '2s' }}
+      />
 
       <div className="container relative">
         <div className="max-w-3xl">

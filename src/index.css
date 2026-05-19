@@ -25,13 +25,13 @@ h1, h2, h3, h4, h5, h6 {
 
 @layer utilities {
   .text-gradient {
-    background: linear-gradient(135deg, #4B6BFB 0%, #06B6D4 100%);
+    background: linear-gradient(135deg, #EC4899 0%, #A855F7 50%, #3B82F6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   .text-gradient-warm {
-    background: linear-gradient(135deg, #6366F1 0%, #4B6BFB 60%, #06B6D4 100%);
+    background: linear-gradient(135deg, #DB2777 0%, #9333EA 50%, #4F46E5 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -92,8 +92,8 @@ h1, h2, h3, h4, h5, h6 {
     text-decoration: none;
   }
   .btn-primary:hover {
-    background: #5B79FF;
-    box-shadow: 0 0 24px rgba(75,107,251,0.35);
+    background: linear-gradient(135deg, #EC4899 0%, #A855F7 50%, #3B82F6 100%);
+    box-shadow: 0 0 24px rgba(168,85,247,0.4);
     transform: translateY(-1px);
   }
   .btn-ghost {
