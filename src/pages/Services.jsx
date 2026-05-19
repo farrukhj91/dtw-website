@@ -50,13 +50,13 @@ function ServiceSection({ service, index }) {
           <p className="text-white/60 font-body text-base leading-relaxed mb-5">{service.tagline}</p>
 
           <div className="glass rounded-xl p-5 mb-5">
-            <p className="text-xs text-white/30 uppercase tracking-widest font-body mb-2">Who It Is For</p>
+            <p className="text-xs text-white/55 uppercase tracking-widest font-body mb-2">Who It Is For</p>
             <p className="text-sm text-white/55 font-body leading-relaxed">{service.who}</p>
           </div>
 
           {service.isRetainer && service.retainerNote && (
             <div className="glass rounded-xl p-5 mb-5 border border-accent-cyan/10">
-              <p className="text-xs text-white/30 uppercase tracking-widest font-body mb-2">Retainer Note</p>
+              <p className="text-xs text-white/55 uppercase tracking-widest font-body mb-2">Retainer Note</p>
               <p className="text-sm text-white/55 font-body leading-relaxed">{service.retainerNote}</p>
             </div>
           )}

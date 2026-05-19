@@ -39,8 +39,8 @@ function ProjectDetail({ project, index }) {
               <span className={`text-xs font-body font-medium uppercase tracking-widest ${project.accentColor}`}>
                 {project.badge}
               </span>
-              <span className="text-white/15">·</span>
-              <span className="text-xs text-white/30 font-body uppercase tracking-widest">{project.category}</span>
+              <span className="text-white/40">·</span>
+              <span className="text-xs text-white/55 font-body uppercase tracking-widest">{project.category}</span>
             </div>
             <h2 className="font-display font-black text-4xl text-white mb-2">{project.name}</h2>
             <p className="text-white/45 font-body">{project.summary}</p>

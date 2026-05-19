@@ -100,8 +100,8 @@ function PlatformDetail({ platform }) {
               <ul className="flex flex-col gap-2.5">
                 {platform.limitations.map((l, i) => (
                   <li key={i} className="flex items-start gap-2.5">
-                    <span className="text-white/20 text-xs mt-0.5 flex-shrink-0">—</span>
-                    <span className="text-sm text-white/35 font-body leading-relaxed">{l}</span>
+                    <span className="text-white/50 text-xs mt-0.5 flex-shrink-0">—</span>
+                    <span className="text-sm text-white/45 font-body leading-relaxed">{l}</span>
                   </li>
                 ))}
               </ul>
@@ -136,7 +136,7 @@ function ComparisonTable() {
           <table className="w-full text-sm font-body min-w-[700px]">
             <thead>
               <tr className="border-b border-white/8">
-                <th className="text-left py-3 pr-6 text-white/30 font-medium w-36"></th>
+                <th className="text-left py-3 pr-6 text-white/55 font-medium w-36"></th>
                 {['Shopify','WooCommerce','OpenCart','Magento','BigCommerce'].map(p => (
                   <th key={p} className="text-left py-3 px-3 text-white font-display font-bold text-sm">{p}</th>
                 ))}
@@ -145,7 +145,7 @@ function ComparisonTable() {
             <tbody>
               {rows.map((r, i) => (
                 <tr key={r.label} className={`border-b border-white/5 ${i % 2 === 0 ? '' : 'bg-white/[0.01]'}`}>
-                  <td className="py-3.5 pr-6 text-white/35 font-medium text-xs">{r.label}</td>
+                  <td className="py-3.5 pr-6 text-white/45 font-medium text-xs">{r.label}</td>
                   <td className="py-3.5 px-3 text-white/50 text-xs">{r.shopify}</td>
                   <td className="py-3.5 px-3 text-white/50 text-xs">{r.woo}</td>
                   <td className="py-3.5 px-3 text-white/50 text-xs">{r.opencart}</td>
@@ -156,7 +156,7 @@ function ComparisonTable() {
             </tbody>
           </table>
         </div>
-        <p className="text-xs text-white/20 font-body mt-3">* Shopify waives transaction fees when using Shopify Payments</p>
+        <p className="text-xs text-white/50 font-body mt-3">* Shopify waives transaction fees when using Shopify Payments</p>
 
         <div className="mt-10 glass rounded-xl p-6">
           <p className="text-sm text-white/50 font-body leading-relaxed">

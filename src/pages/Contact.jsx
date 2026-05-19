@@ -218,7 +218,7 @@ function ConsultationForm() {
       </div>
 
       {/* Privacy note */}
-      <p className="text-xs text-white/20 font-body leading-relaxed">
+      <p className="text-xs text-white/50 font-body leading-relaxed">
         Your information is used only to respond to your enquiry. We don't sell or share your data.
       </p>
 
@@ -242,12 +242,12 @@ function Sidebar() {
         <div key={item.t} className="card p-5">
           <div className="text-xl mb-3">{item.icon}</div>
           <h3 className="font-display font-bold text-white text-sm mb-1.5">{item.t}</h3>
-          <p className="text-white/35 text-sm font-body leading-relaxed">{item.d}</p>
+          <p className="text-white/45 text-sm font-body leading-relaxed">{item.d}</p>
         </div>
       ))}
 
       <div className="glass rounded-xl p-5">
-        <p className="text-xs text-white/30 font-body uppercase tracking-widest mb-3">Prefer email?</p>
+        <p className="text-xs text-white/55 font-body uppercase tracking-widest mb-3">Prefer email?</p>
         <a href="mailto:hello@digitechworks.com" className="text-accent-blue text-sm font-body hover:text-blue-300 transition-colors">
           hello@digitechworks.com
         </a>

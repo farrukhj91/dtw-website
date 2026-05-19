@@ -26,7 +26,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <img src="/DTW_1_png_nobg.png" alt="DigiTechWorks" className="h-10 w-auto mb-4" />
-            <p className="text-sm text-white/30 leading-relaxed mb-6 font-body">
+            <p className="text-sm text-white/55 leading-relaxed mb-6 font-body">
               Professional ecommerce store setup and optimization. Shopify, WooCommerce, OpenCart.
             </p>
             <a href="mailto:hello@digitechworks.com" className="text-sm text-accent-blue hover:text-blue-300 transition-colors font-body">
@@ -40,7 +40,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-3">
               {pages.map(p => (
                 <li key={p.label}>
-                  <Link to={p.to} className="text-sm text-white/35 hover:text-white/70 transition-colors font-body">
+                  <Link to={p.to} className="text-sm text-white/45 hover:text-white/75 transition-colors font-body">
                     {p.label}
                   </Link>
                 </li>
@@ -54,7 +54,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-3">
               {servicesList.map(s => (
                 <li key={s}>
-                  <Link to="/services" className="text-sm text-white/35 hover:text-white/70 transition-colors font-body">
+                  <Link to="/services" className="text-sm text-white/45 hover:text-white/75 transition-colors font-body">
                     {s}
                   </Link>
                 </li>
@@ -68,7 +68,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-3 mb-8">
               {['LinkedIn','Instagram','Facebook'].map(s => (
                 <li key={s}>
-                  <a href="#" className="text-sm text-white/35 hover:text-white/70 transition-colors font-body">{s}</a>
+                  <a href="#" className="text-sm text-white/45 hover:text-white/75 transition-colors font-body">{s}</a>
                 </li>
               ))}
             </ul>
@@ -80,10 +80,10 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 border-t border-white/5">
-          <p className="text-xs text-white/20 font-body">© {new Date().getFullYear()} DigiTechWorks. All rights reserved.</p>
+          <p className="text-xs text-white/50 font-body">© {new Date().getFullYear()} DigiTechWorks. All rights reserved.</p>
           <div className="flex gap-6">
-            <a href="#" className="text-xs text-white/20 hover:text-white/40 transition-colors font-body">Privacy Policy</a>
-            <a href="#" className="text-xs text-white/20 hover:text-white/40 transition-colors font-body">Terms</a>
+            <a href="#" className="text-xs text-white/50 hover:text-white/75 transition-colors font-body">Privacy Policy</a>
+            <a href="#" className="text-xs text-white/50 hover:text-white/75 transition-colors font-body">Terms</a>
           </div>
         </div>
       </div>

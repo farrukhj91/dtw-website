@@ -29,7 +29,7 @@ export default function Navbar() {
         <Link to="/" className="flex items-center gap-3 group">
           <img src="/DTW_1_png_nobg.png" alt="DigiTechWorks" className="h-8 w-auto" />
           <span className="hidden sm:block w-px h-4 bg-white/10" />
-          <span className="hidden sm:block text-2xs text-white/25 tracking-[0.18em] uppercase font-body">DigiTechWorks</span>
+          <span className="hidden sm:block text-2xs text-white/55 tracking-[0.18em] uppercase font-body">DigiTechWorks</span>
         </Link>
 
         {/* Desktop nav */}

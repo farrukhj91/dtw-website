@@ -49,7 +49,7 @@ function Hero() {
             ].map(({ n, l }) => (
               <div key={l}>
                 <p className="font-display font-black text-2xl text-white">{n}</p>
-                <p className="text-xs text-white/30 font-body mt-0.5">{l}</p>
+                <p className="text-xs text-white/55 font-body mt-0.5">{l}</p>
               </div>
             ))}
           </div>
@@ -145,7 +145,7 @@ function PlatformsBar() {
         <p className="label text-center mb-8">Platform Expertise</p>
         <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-12">
           {['Shopify', 'WooCommerce', 'OpenCart', 'Magento', 'BigCommerce'].map((p, i) => (
-            <span key={p} className="font-display font-bold text-lg text-white/15 hover:text-white/45 transition-colors duration-300 cursor-default" style={{transitionDelay:`${i*50}ms`}}>
+            <span key={p} className="font-display font-bold text-lg text-white/40 hover:text-white/70 transition-colors duration-300 cursor-default" style={{transitionDelay:`${i*50}ms`}}>
               {p}
             </span>
           ))}
@@ -202,7 +202,7 @@ function ServiceCard({ icon, title, desc, delay }) {
         {icon}
       </div>
       <h3 className="font-display font-bold text-white text-sm mb-2">{title}</h3>
-      <p className="text-white/35 text-xs leading-relaxed font-body">{desc}</p>
+      <p className="text-white/45 text-xs leading-relaxed font-body">{desc}</p>
     </div>
   )
 }
@@ -297,7 +297,7 @@ function StageCard({ stage, delay }) {
           </div>
           <p className="label" style={{color: 'inherit'}}>{stage.label}</p>
           {stage.isRetainer && (
-            <span className="inline-block mt-2 text-2xs px-2.5 py-1 rounded-full bg-accent-cyan/10 text-accent-cyan font-body font-medium">
+            <span className="inline-block mt-2 text-xs px-2.5 py-1 rounded-full bg-accent-cyan/10 text-accent-cyan font-body font-medium">
               Monthly Retainer
             </span>
           )}
@@ -320,7 +320,7 @@ function StageCard({ stage, delay }) {
             ))}
           </ul>
           <div className={`rounded-xl p-3.5 bg-gradient-to-r ${stage.color}`}>
-            <p className="text-xs text-white/35 font-body">
+            <p className="text-xs text-white/45 font-body">
               <span className="text-white/55 font-medium">Outcome: </span>
               {stage.outcome}
             </p>
@@ -364,12 +364,12 @@ function ProjectCard({ name, category, platform, badge, color, accentColor, summ
         <span className={`font-display font-black text-3xl ${accentColor} opacity-40`}>{name[0]}</span>
       </div>
       <div className="flex items-center gap-2 mb-3">
-        <span className="text-2xs text-white/30 font-body uppercase tracking-widest">{category}</span>
-        <span className="text-white/15">·</span>
-        <span className={`text-2xs font-body font-medium uppercase tracking-widest ${accentColor}`}>{badge}</span>
+        <span className="text-xs text-white/55 font-body uppercase tracking-widest">{category}</span>
+        <span className="text-white/40">·</span>
+        <span className={`text-xs font-body font-medium uppercase tracking-widest ${accentColor}`}>{badge}</span>
       </div>
       <h3 className="font-display font-bold text-white text-xl mb-2">{name}</h3>
-      <p className="text-white/35 text-sm leading-relaxed font-body mb-5">{summary}</p>
+      <p className="text-white/45 text-sm leading-relaxed font-body mb-5">{summary}</p>
       <div className="flex flex-wrap gap-2">
         {metrics.map(m => (
           <span key={m} className="text-xs px-3 py-1 rounded-full bg-white/5 text-white/40 font-body">{m}</span>
@@ -421,7 +421,7 @@ function ReasonCard({ t, d, delay }) {
         <div className="w-1.5 h-1.5 rounded-full bg-accent-blue mt-2 flex-shrink-0" />
         <div>
           <h3 className="font-display font-bold text-white text-sm mb-1.5">{t}</h3>
-          <p className="text-white/35 text-sm leading-relaxed font-body">{d}</p>
+          <p className="text-white/45 text-sm leading-relaxed font-body">{d}</p>
         </div>
       </div>
     </div>
@@ -456,7 +456,7 @@ function HomeCTA() {
                 See Our Work
               </Link>
             </div>
-            <p className="text-xs text-white/20 font-body">
+            <p className="text-xs text-white/50 font-body">
               No commitment · Free consultation · Response within 24 hours
             </p>
           </div>
@@ -471,7 +471,7 @@ function HomeCTA() {
               <div key={item.t} className="card p-5 text-center">
                 <div className="text-xl mb-3">{item.icon}</div>
                 <h3 className="font-display font-bold text-white text-sm mb-1.5">{item.t}</h3>
-                <p className="text-white/30 text-xs font-body leading-relaxed">{item.d}</p>
+                <p className="text-white/55 text-xs font-body leading-relaxed">{item.d}</p>
               </div>
             ))}
           </div>

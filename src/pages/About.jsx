@@ -95,7 +95,7 @@ function PrincipleCard({ n, t, d, delay }) {
         <span className="font-display font-black text-2xl text-gradient-warm opacity-20 leading-none flex-shrink-0">{n}</span>
         <div>
           <h3 className="font-display font-bold text-white text-sm mb-1.5">{t}</h3>
-          <p className="text-white/35 text-sm font-body leading-relaxed">{d}</p>
+          <p className="text-white/45 text-sm font-body leading-relaxed">{d}</p>
         </div>
       </div>
     </div>
@@ -148,7 +148,7 @@ function AgileStep({ n, t, d, delay }) {
       <span className="font-display font-black text-xl text-gradient-warm opacity-25 flex-shrink-0 leading-none mt-0.5">{n}</span>
       <div>
         <h3 className="font-display font-bold text-white text-sm mb-1">{t}</h3>
-        <p className="text-white/35 text-xs font-body leading-relaxed">{d}</p>
+        <p className="text-white/45 text-xs font-body leading-relaxed">{d}</p>
       </div>
     </div>
   )
