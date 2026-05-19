@@ -14,9 +14,9 @@ export default function ComingSoon() {
           <img
             src="/DTW_1_png_nobg.png"
             alt="DigiTechWorks"
-            className="mx-auto block w-72 sm:w-96 md:w-[28rem] lg:w-[32rem] h-auto"
+            className="mx-auto block w-56 sm:w-72 md:w-80 lg:w-96 h-auto"
           />
-          <p className="-mt-2 sm:mt-0 text-2xs sm:text-xs tracking-[0.32em] uppercase text-white/30 font-body">
+          <p className="mt-4 sm:mt-5 text-2xs sm:text-xs tracking-[0.32em] uppercase text-white/30 font-body">
             DigiTechWorks
           </p>
         </div>
