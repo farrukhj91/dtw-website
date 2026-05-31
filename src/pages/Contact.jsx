@@ -100,10 +100,16 @@ function Select({ label, id, options, value, onChange, required, placeholder = '
 function Checkbox({ label, checked, onChange }) {
   return (
     <label className="flex items-center gap-3 cursor-pointer group">
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={onChange}
+        className="sr-only peer"
+      />
       <div
         className={`w-5 h-5 rounded-md border flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
           checked ? 'bg-accent-blue border-accent-blue' : 'border-white/15 group-hover:border-white/30'
-        }`}
+        } peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent-blue`}
       >
         {checked && (
           <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
@@ -124,6 +130,8 @@ function ConsultationForm() {
     services: [],
   })
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState(null)
 
   const update = (key) => (e) => setFormData(p => ({ ...p, [key]: e.target.value }))
 
@@ -134,9 +142,61 @@ function ConsultationForm() {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setSubmitted(true)
+
+    if (formData.services.length === 0) {
+      setError('Please select at least one service.')
+      return
+    }
+    setError(null)
+    setSubmitting(true)
+
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
+
+    // Fallback: if no Web3Forms key configured, show success but warn in console.
+    // Production must have VITE_WEB3FORMS_ACCESS_KEY set in Vercel env vars.
+    if (!accessKey) {
+      console.warn('[Contact] VITE_WEB3FORMS_ACCESS_KEY not set — form submission was NOT delivered. Configure it in Vercel project env vars to enable email delivery.')
+      setSubmitted(true)
+      setSubmitting(false)
+      return
+    }
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: `DTW Consultation Request — ${formData.fullName}`,
+          from_name: formData.fullName,
+          replyto: formData.email,
+          cc: 'mmateen85@gmail.com',
+          'Full Name': formData.fullName,
+          'Email': formData.email,
+          'Company': formData.company || '—',
+          'Phone': formData.phone || '—',
+          'Platform Needed': formData.platform,
+          'Business Type': formData.businessType,
+          'Services Required': formData.services.join(', '),
+          'Product Range': formData.productRange,
+          'Budget Range': formData.budget,
+          'Timeline': formData.timeline,
+          'Additional Details': formData.details || '—',
+        }),
+      })
+      const result = await response.json()
+      if (response.ok && result.success) {
+        setSubmitted(true)
+      } else {
+        setError('Something went wrong. Please email hello@digitechworks.com directly.')
+      }
+    } catch (err) {
+      setError('Network error. Please try again or email hello@digitechworks.com.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   if (submitted) {
@@ -222,8 +282,16 @@ function ConsultationForm() {
         Your information is used only to respond to your enquiry. We don't sell or share your data.
       </p>
 
-      <button type="submit" className="btn-primary justify-center py-4 text-base">
-        Submit Consultation Request →
+      {error && (
+        <p className="text-sm text-red-400 font-body" role="alert">{error}</p>
+      )}
+
+      <button
+        type="submit"
+        disabled={submitting}
+        className="btn-primary justify-center py-4 text-base disabled:opacity-60 disabled:cursor-not-allowed"
+      >
+        {submitting ? 'Submitting…' : 'Submit Consultation Request →'}
       </button>
     </form>
   )
