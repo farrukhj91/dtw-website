@@ -1,5 +1,5 @@
 // src/pages/Contact.jsx
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useInView } from '../hooks/useInView'
 
 const platforms = ['Shopify', 'WooCommerce', 'OpenCart', 'Not Sure Yet']
@@ -57,11 +57,11 @@ function PageHero() {
   )
 }
 
-function Input({ label, id, type = 'text', placeholder, value, onChange, required }) {
+function Input({ label, id, type = 'text', placeholder, value, onChange, required, error }) {
   return (
     <div>
       <label htmlFor={id} className="form-label">
-        {label}{required && <span className="text-accent-blue ml-0.5">*</span>}
+        {label}{required && <span className={`ml-0.5 ${error ? 'text-red-400' : 'text-accent-blue'}`}>*</span>}
       </label>
       <input
         id={id}
@@ -70,24 +70,26 @@ function Input({ label, id, type = 'text', placeholder, value, onChange, require
         value={value}
         onChange={onChange}
         required={required}
-        className="form-input"
+        aria-invalid={error || undefined}
+        className={`form-input ${error ? 'form-input--error' : ''}`}
       />
     </div>
   )
 }
 
-function Select({ label, id, options, value, onChange, required, placeholder = 'Select one...' }) {
+function Select({ label, id, options, value, onChange, required, error, placeholder = 'Select one...' }) {
   return (
     <div>
       <label htmlFor={id} className="form-label">
-        {label}{required && <span className="text-accent-blue ml-0.5">*</span>}
+        {label}{required && <span className={`ml-0.5 ${error ? 'text-red-400' : 'text-accent-blue'}`}>*</span>}
       </label>
       <select
         id={id}
         value={value}
         onChange={onChange}
         required={required}
-        className="form-input appearance-none"
+        aria-invalid={error || undefined}
+        className={`form-input appearance-none ${error ? 'form-input--error' : ''}`}
         style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.3)' strokeWidth='2'%3E%3Cpolyline points='6,9 12,15 18,9'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center' }}
       >
         <option value="" disabled>{placeholder}</option>
@@ -132,23 +134,55 @@ function ConsultationForm() {
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState(null)
+  const [missingFields, setMissingFields] = useState([])
+  const formRef = useRef(null)
 
-  const update = (key) => (e) => setFormData(p => ({ ...p, [key]: e.target.value }))
+  // Map state keys (camelCase) to DOM field IDs used in missingFields tracking
+  const dataKeyToFieldId = {
+    fullName: 'name', businessType: 'biztype', productRange: 'products',
+  }
+
+  const clearMissing = (id) => {
+    setMissingFields(prev => prev.length ? prev.filter(k => k !== id) : prev)
+  }
+
+  const update = (key) => (e) => {
+    setFormData(p => ({ ...p, [key]: e.target.value }))
+    clearMissing(dataKeyToFieldId[key] || key)
+    if (error) setError(null)
+  }
 
   const toggleService = (s) => {
     setFormData(p => ({
       ...p,
       services: p.services.includes(s) ? p.services.filter(x => x !== s) : [...p.services, s],
     }))
+    clearMissing('services')
+    if (error) setError(null)
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (formData.services.length === 0) {
-      setError('Please select at least one service.')
+    // Validate all required fields up-front
+    const missing = []
+    if (!formData.fullName.trim()) missing.push('name')
+    if (!formData.email.trim()) missing.push('email')
+    if (!formData.platform) missing.push('platform')
+    if (!formData.businessType.trim()) missing.push('biztype')
+    if (formData.services.length === 0) missing.push('services')
+    if (!formData.productRange) missing.push('products')
+    if (!formData.budget) missing.push('budget')
+    if (!formData.timeline) missing.push('timeline')
+
+    if (missing.length > 0) {
+      setMissingFields(missing)
+      setError('Please complete the highlighted required fields before submitting.')
+      formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
       return
     }
+
+    setMissingFields([])
     setError(null)
     setSubmitting(true)
 
@@ -191,9 +225,11 @@ function ConsultationForm() {
         setSubmitted(true)
       } else {
         setError('Something went wrong. Please email hello@digitechworks.com directly.')
+        formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }
     } catch (err) {
       setError('Network error. Please try again or email hello@digitechworks.com.')
+      formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     } finally {
       setSubmitting(false)
     }
@@ -216,13 +252,19 @@ function ConsultationForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="card p-8 flex flex-col gap-7">
+    <form ref={formRef} onSubmit={handleSubmit} noValidate className="card p-8 flex flex-col gap-7">
+      {error && (
+        <div role="alert" className="rounded-lg border border-red-400/40 bg-red-400/[0.06] px-4 py-3">
+          <p className="text-sm text-red-400 font-body">{error}</p>
+        </div>
+      )}
+
       {/* Row 1: Name + Email */}
       <div className="grid sm:grid-cols-2 gap-5">
         <Input label="Full Name" id="name" placeholder="Your name" value={formData.fullName}
-          onChange={update('fullName')} required />
+          onChange={update('fullName')} required error={missingFields.includes('name')} />
         <Input label="Email Address" id="email" type="email" placeholder="you@company.com"
-          value={formData.email} onChange={update('email')} required />
+          value={formData.email} onChange={update('email')} required error={missingFields.includes('email')} />
       </div>
 
       {/* Row 2: Company + Phone */}
@@ -235,33 +277,43 @@ function ConsultationForm() {
 
       {/* Platform */}
       <Select label="Platform Needed" id="platform" options={platforms}
-        value={formData.platform} onChange={update('platform')} required />
+        value={formData.platform} onChange={update('platform')} required
+        error={missingFields.includes('platform')} />
 
       {/* Business type */}
       <Input label="Business Type" id="biztype" placeholder="e.g. Fashion retail, Electronics, Food & beverage..."
-        value={formData.businessType} onChange={update('businessType')} required />
+        value={formData.businessType} onChange={update('businessType')} required
+        error={missingFields.includes('biztype')} />
 
       {/* Services checkboxes */}
-      <div>
-        <p className="form-label mb-4">Services Required <span className="text-accent-blue">*</span></p>
+      <div id="services-group">
+        <p className={`form-label mb-4 ${missingFields.includes('services') ? 'text-red-400' : ''}`}>
+          Services Required <span className={`ml-0.5 ${missingFields.includes('services') ? 'text-red-400' : 'text-accent-blue'}`}>*</span>
+        </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {serviceOptions.map(s => (
             <Checkbox key={s} label={s} checked={formData.services.includes(s)}
               onChange={() => toggleService(s)} />
           ))}
         </div>
+        {missingFields.includes('services') && (
+          <p className="text-xs text-red-400 mt-3">Select at least one service.</p>
+        )}
       </div>
 
       {/* Product range */}
       <Select label="Estimated Number of Products" id="products" options={productRanges}
-        value={formData.productRange} onChange={update('productRange')} required />
+        value={formData.productRange} onChange={update('productRange')} required
+        error={missingFields.includes('products')} />
 
       {/* Budget + Timeline */}
       <div className="grid sm:grid-cols-2 gap-5">
         <Select label="Budget Range" id="budget" options={budgets}
-          value={formData.budget} onChange={update('budget')} required />
+          value={formData.budget} onChange={update('budget')} required
+          error={missingFields.includes('budget')} />
         <Select label="Timeline" id="timeline" options={timelines}
-          value={formData.timeline} onChange={update('timeline')} required />
+          value={formData.timeline} onChange={update('timeline')} required
+          error={missingFields.includes('timeline')} />
       </div>
 
       {/* Additional details */}
@@ -281,10 +333,6 @@ function ConsultationForm() {
       <p className="text-xs text-white/50 font-body leading-relaxed">
         Your information is used only to respond to your enquiry. We don't sell or share your data.
       </p>
-
-      {error && (
-        <p className="text-sm text-red-400 font-body" role="alert">{error}</p>
-      )}
 
       <button
         type="submit"
